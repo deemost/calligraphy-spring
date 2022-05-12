@@ -1,5 +1,7 @@
 package com.arabiccalligraphy.api.model;
 
+import com.arabiccalligraphy.api.DAO.ArtworkDAO;
+
 public class Artwork {
 
     private String title;
@@ -7,13 +9,16 @@ public class Artwork {
     private String image;
     private Artist artist;
 
-    public String getTitle() {
-        return title;
+    public Artwork (String title, String[] tags, String image, Artist artist){
+        this.title = title;
+        this.tags = tags;
+        this.image = image;
+        this.artist = artist;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getTitle() {return title;}
+
+    public void setTitle(String title) {this.title = title;}
 
     public String[] getTags() {
         return tags;
