@@ -1,50 +1,54 @@
 package com.arabiccalligraphy.api.DAO;
 
-import com.arabiccalligraphy.api.model.Artist;
 import com.arabiccalligraphy.api.model.Artwork;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ArtworkDAO {
+    private List<Artwork> artworks = new ArrayList<>();
 
-    public List<Artwork> loadArtwork(String page) throws IOException, JSONException {
-        List<Artwork> artworks = new ArrayList<>();
+    public List<Artwork> getArtworks() {
+        return artworks;
+    }
 
-        String text = Files.readString(Paths.get(page + ".json"));
-        JSONObject object = new JSONObject(text);
-        JSONArray array = object.getJSONArray("content");
+    @PostConstruct
+    public void loadArtwork() throws IOException {
 
-        for(int i = 0; i < array.length(); i++){
+        File file = ResourceUtils.getFile("classpath:data/index.json");
 
-            String name = array.getJSONObject(i).getString("nameAr");
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(file);
 
-            //String[] tags = array.getJSONObject(i).getString("tags");
-            //JSONArray tagArray = array.getJSONObject(i).getJSONArray("tags");
-            //String[] tags = new String[tagArray.length()];
-            //for(int j = 0; j < tagArray.length(); j++){
-            //    tags[j] = tagArray.getJSONObject(j).getString("");
-            //}
-            JSONArray tagArray = (JSONArray) array.getJSONObject(i).get("cars");
-            String[] tags = new String[tagArray.length()];
-            for (String t : tagArray.getJSONObject(i).names()) {
-                tags[i] = t;
+        ArrayNode contentNode = (ArrayNode) root.get("content");
+        for (JsonNode contentItem : contentNode) {
+            String title = contentItem.get("nameAr").asText();
+            if (title.equals("null")) {
+                title = contentItem.get("name").asText();
+            }
+            String image = contentItem.get("imgSrc").asText();
+
+            ArrayNode tagsNode = (ArrayNode) contentItem.get("tags");
+            String[] tags = new String[tagsNode.size()];
+
+            for (int i = 0; i < tagsNode.size(); i++) {
+                tags[i] = tagsNode.get(i).asText();
             }
 
-            String image = array.getJSONObject(i).getString("imgSrc");
-            Artist artist = new Artist(array.getJSONObject(i).getString("artist"));
-
-            Artwork artwork = new Artwork(name, tags, image, artist);
+            Artwork artwork = new Artwork(title, tags, image, null);
             artworks.add(artwork);
-
         }
-        return artworks;
+
+        System.out.println(artworks);
     }
 
 }
