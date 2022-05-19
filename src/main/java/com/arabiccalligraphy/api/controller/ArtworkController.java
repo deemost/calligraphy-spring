@@ -30,7 +30,7 @@ public class ArtworkController {
 
         List<Artwork> result = artworkDAO.getArtworks().get(artist + ".json");
 
-        if(result == null){
+        if(result == null) {
             return new ResponseEntity<List<Artwork>>( HttpStatus.NOT_FOUND);
         }
 
