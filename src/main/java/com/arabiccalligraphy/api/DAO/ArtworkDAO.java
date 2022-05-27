@@ -66,8 +66,17 @@ public class ArtworkDAO {
             //Artist creation
             Artist artist = new Artist(contentItem.get("artist").asText());
 
+            //width creation
+            int width = contentItem.get("width").asInt();
+
+            //height creation
+            int height = contentItem.get("height").asInt();
+
+            //id creation
+            int id = contentItem.get("id").asInt();
+
             //artwork created
-            Artwork artwork = new Artwork(title, tags, image, artist);
+            Artwork artwork = new Artwork(title, tags, image, artist, width, height, id);
 
             //artwork added
             artworks.get(fileName).add(artwork);

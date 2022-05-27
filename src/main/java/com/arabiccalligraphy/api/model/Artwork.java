@@ -8,12 +8,18 @@ public class Artwork {
     private String[] tags;
     private String image;
     private Artist artist;
+    private int width;
+    private int height;
+    private int id;
 
-    public Artwork (String title, String[] tags, String image, Artist artist){
+    public Artwork (String title, String[] tags, String image, Artist artist, int width, int height, int id){
         this.title = title;
         this.tags = tags;
         this.image = image;
         this.artist = artist;
+        this.width = width;
+        this.height = height;
+        this.id = id;
     }
 
     public String getTitle() {return title;}
@@ -43,4 +49,16 @@ public class Artwork {
     public void setArtist(Artist artist) {
         this.artist = artist;
     }
+
+    public int getWidth() {return width;}
+
+    public void setWidth(int width) {this.width = width;}
+
+    public int getHeight() {return height;}
+
+    public void setHeight(int height) {this.height = height;}
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
 }
