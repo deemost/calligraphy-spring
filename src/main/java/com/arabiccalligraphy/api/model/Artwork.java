@@ -10,9 +10,9 @@ public class Artwork {
     private Artist artist;
     private int width;
     private int height;
-    private int id;
+    private String id;
 
-    public Artwork (String title, String[] tags, String image, Artist artist, int width, int height, int id){
+    public Artwork (String id, String title, String[] tags, String image, Artist artist, int width, int height){
         this.title = title;
         this.tags = tags;
         this.image = image;
@@ -58,7 +58,7 @@ public class Artwork {
 
     public void setHeight(int height) {this.height = height;}
 
-    public int getId() {return id;}
+    public String getId() {return id;}
 
-    public void setId(int id) {this.id = id;}
+    public void setId(String id) {this.id = id;}
 }

@@ -73,10 +73,10 @@ public class ArtworkDAO {
             int height = contentItem.get("height").asInt();
 
             //id creation
-            int id = contentItem.get("id").asInt();
+            String id = contentItem.get("id").asText();
 
             //artwork created
-            Artwork artwork = new Artwork(title, tags, image, artist, width, height, id);
+            Artwork artwork = new Artwork(id, title, tags, image, artist, width, height);
 
             //artwork added
             artworks.get(fileName).add(artwork);
