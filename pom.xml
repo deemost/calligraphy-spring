@@ -15,6 +15,7 @@
 	<description>arabic calligraphy api</description>
 	<properties>
 		<java.version>18</java.version>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss'Z'</maven.build.timestamp.format>
 	</properties>
 	<dependencies>
 
@@ -50,6 +51,7 @@
                 </configuration>
             </plugin>
         </plugins>
+		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
 	</build>
 
 </project>

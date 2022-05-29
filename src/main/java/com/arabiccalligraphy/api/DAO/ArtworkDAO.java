@@ -5,12 +5,13 @@ import com.arabiccalligraphy.api.model.Artwork;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +20,14 @@ import java.util.Map;
 @Service
 public class ArtworkDAO {
     private Map<String, List<Artwork>> artworks = new HashMap<>();
+    private ResourceLoader resourceLoader;
 
     public Map<String, List<Artwork>> getArtworks() {
         return artworks;
+    }
+
+    public ArtworkDAO(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
     }
 
     @PostConstruct
@@ -39,10 +45,11 @@ public class ArtworkDAO {
 
     private void loadArtworkFromFile(String fileName) throws IOException {
 
-        File file = ResourceUtils.getFile("classpath:data/" + fileName);
+        Resource resource = resourceLoader.getResource("classpath:data/" + fileName);
+        InputStream dataAaStream = resource.getInputStream();
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(file);
+        JsonNode root = mapper.readTree(dataAaStream);
 
         ArrayNode contentNode = (ArrayNode) root.get("content");
         for (JsonNode contentItem : contentNode) {
