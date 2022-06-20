@@ -27,7 +27,7 @@ public class ArtworkController {
                                                         @RequestParam(required = false) Integer pageSize) {
 
         if(artist == null){
-            return new ResponseEntity<List<Artwork>>(artworkDAO.getArtworks().get("index.json"), HttpStatus.OK);
+            artist = "index";
         }
         List<Artwork> result = artworkDAO.getArtworks().get(artist + ".json");
 
@@ -38,12 +38,10 @@ public class ArtworkController {
 
         if((pageSize != null) && (page != null)) {
 
-            List<Artwork> pagedResult;
-
             int start = Math.min(page * pageSize, result.size());
             int end = Math.min(start + pageSize, result.size());
 
-            pagedResult = result.subList(start, end);
+            List<Artwork> pagedResult = result.subList(start, end);
 
             return new ResponseEntity<List<Artwork>>(pagedResult, HttpStatus.OK);
 
