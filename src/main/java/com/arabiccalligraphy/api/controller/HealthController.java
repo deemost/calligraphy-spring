@@ -12,6 +12,5 @@ public class HealthController {
     @GetMapping("/")
     public Map<String, String > health() {
         return Collections.singletonMap("status", "ok");
-
     }
 }
