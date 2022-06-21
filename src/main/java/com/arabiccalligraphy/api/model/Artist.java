@@ -24,4 +24,11 @@ public class Artist {
     public void setArtworks(List<Artwork> artworks) {
         this.artworks = artworks;
     }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
