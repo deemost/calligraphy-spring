@@ -2,6 +2,8 @@ package com.arabiccalligraphy.api.model;
 
 import com.arabiccalligraphy.api.DAO.ArtworkDAO;
 
+import java.util.Arrays;
+
 public class Artwork {
 
     private String title;
@@ -61,4 +63,17 @@ public class Artwork {
     public String getId() {return id;}
 
     public void setId(String id) {this.id = id;}
+
+    @Override
+    public String toString() {
+        return "Artwork{" +
+                "title='" + title + '\'' +
+                ", tags=" + Arrays.toString(tags) +
+                ", image='" + image + '\'' +
+                ", artist=" + artist +
+                ", width=" + width +
+                ", height=" + height +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

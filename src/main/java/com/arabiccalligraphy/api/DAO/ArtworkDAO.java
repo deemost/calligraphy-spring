@@ -9,6 +9,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +22,10 @@ import java.util.Map;
 
 @Service
 public class ArtworkDAO {
+
+    private static final Logger logger = LoggerFactory.getLogger(ArtworkDAO.class);
+
+
     private Map<String, List<Artwork>> artworks = new HashMap<>();
     private ResourceLoader resourceLoader;
 
@@ -89,7 +96,7 @@ public class ArtworkDAO {
             artworks.get(fileName).add(artwork);
         }
 
-        System.out.println(artworks);
+        logger.debug("artworks: {}", artworks);
     }
 
 }
