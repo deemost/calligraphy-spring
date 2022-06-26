@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,7 +28,8 @@ public class ArtworkController {
     @GetMapping("/api/v1/artworks")
     public ResponseEntity<List<Artwork>> getAllArtworks(@RequestParam(required = false) String artist,
                                                         @RequestParam(required = false) Integer page,
-                                                        @RequestParam(required = false) Integer pageSize) {
+                                                        @RequestParam(required = false) Integer pageSize,
+                                                        @RequestParam(required = false) String tag) {
 
         if (artist == null) {
             artist = "index";
@@ -39,18 +42,29 @@ public class ArtworkController {
             return new ResponseEntity<List<Artwork>>(HttpStatus.NOT_FOUND);
         }
 
-        if ((pageSize != null) && (page != null)) {
-            int start = Math.min(page * pageSize, result.size());
-            int end = Math.min(start + pageSize, result.size());
+        List<Artwork> filteredResult = new ArrayList<>(result);
 
-            List<Artwork> pagedResult = result.subList(start, end);
-            logger.debug("Found {} paged artwork for artist: {}, pageSize: {}, page: {}", pagedResult.size(), artist, pageSize, page);
+        if (tag != null) {
+            for (int i = 0; i < result.size(); i++) {
+                if (!Arrays.asList(result.get(i).getTags()).contains(tag)) {
+                    filteredResult.remove(result.get(i));
+                }
+            }
+        }
+
+        if ((pageSize != null) && (page != null)) {
+            int start = Math.min(page * pageSize, filteredResult.size());
+            int end = Math.min(start + pageSize, filteredResult.size());
+
+            List<Artwork> pagedResult = filteredResult.subList(start, end);
+            logger.debug("Found {} paged artwork for artist: {}, pageSize: {}, page: {}, tag: {}",
+                    pagedResult.size(), artist, pageSize, page, tag);
 
             return new ResponseEntity<List<Artwork>>(pagedResult, HttpStatus.OK);
         }
 
-        logger.debug("Found {} total artwork for artist: {}", result.size(), artist);
-        return new ResponseEntity<List<Artwork>>(result, HttpStatus.OK);
+        logger.debug("Found {} total artwork for artist: {}, tag: {}", result.size(), artist, tag);
+        return new ResponseEntity<List<Artwork>>(filteredResult, HttpStatus.OK);
     }
 
 }
