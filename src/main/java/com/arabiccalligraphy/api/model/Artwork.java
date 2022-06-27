@@ -1,7 +1,5 @@
 package com.arabiccalligraphy.api.model;
 
-import com.arabiccalligraphy.api.DAO.ArtworkDAO;
-
 import java.util.Arrays;
 
 public class Artwork {
@@ -14,7 +12,7 @@ public class Artwork {
     private int height;
     private String id;
 
-    public Artwork (String id, String title, String[] tags, String image, Artist artist, int width, int height){
+    public Artwork(String id, String title, String[] tags, String image, Artist artist, int width, int height) {
         this.title = title;
         this.tags = tags;
         this.image = image;
@@ -24,9 +22,13 @@ public class Artwork {
         this.id = id;
     }
 
-    public String getTitle() {return title;}
+    public String getTitle() {
+        return title;
+    }
 
-    public void setTitle(String title) {this.title = title;}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String[] getTags() {
         return tags;
@@ -52,17 +54,29 @@ public class Artwork {
         this.artist = artist;
     }
 
-    public int getWidth() {return width;}
+    public int getWidth() {
+        return width;
+    }
 
-    public void setWidth(int width) {this.width = width;}
+    public void setWidth(int width) {
+        this.width = width;
+    }
 
-    public int getHeight() {return height;}
+    public int getHeight() {
+        return height;
+    }
 
-    public void setHeight(int height) {this.height = height;}
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
-    public String getId() {return id;}
+    public String getId() {
+        return id;
+    }
 
-    public void setId(String id) {this.id = id;}
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
