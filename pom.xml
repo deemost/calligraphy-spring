@@ -45,38 +45,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!--configuration>
-                    <source>18</source>
-                </configuration-->
             </plugin>
-<!--			<plugin>-->
-<!--				<groupId>br.com.ingenieux</groupId>-->
-<!--				<artifactId>beanstalk-maven-plugin</artifactId>-->
-<!--				<version>1.5.0</version>-->
-<!--				<configuration>-->
-<!--					<applicationName>callig-api</applicationName>-->
-<!--					<s3Bucket>elasticbeanstalk-us-east-1-055581772511</s3Bucket>-->
-<!--					<s3Key>${project.build.finalName}.jar</s3Key>-->
-<!--					&lt;!&ndash; Path of the deployed application: cnamePrefix.us-east-1.elasticbeanstalk.com &ndash;&gt;-->
-<!--					<cnamePrefix>${project.artifactId}</cnamePrefix>-->
-<!--					<environmentRef>Calligapi-env</environmentRef>-->
-<!--					<solutionStack>64bit Amazon Linux 2 v3.2.15 running Corretto 11</solutionStack>-->
-<!--					<versionLabel>${maven.build.timestamp}</versionLabel>-->
-<!--				</configuration>-->
-<!--				<dependencies>-->
-<!--					&lt;!&ndash; needed only for the plugin's upload-source-bundle target &ndash;&gt;-->
-<!--					<dependency>-->
-<!--						<groupId>javax.xml.bind</groupId>-->
-<!--						<artifactId>jaxb-api</artifactId>-->
-<!--						<version>2.3.1</version>-->
-<!--					</dependency>-->
-<!--					<dependency>-->
-<!--						<groupId>org.glassfish.jaxb</groupId>-->
-<!--						<artifactId>jaxb-runtime</artifactId>-->
-<!--						<version>2.3.6</version>-->
-<!--					</dependency>-->
-<!--				</dependencies>-->
-<!--			</plugin>-->
         </plugins>
 		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
 	</build>

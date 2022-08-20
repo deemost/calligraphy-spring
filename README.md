@@ -68,3 +68,16 @@ See: http://beanstalker.ingenieux.com.br/beanstalk-maven-plugin/usage.html
 ### To manage older versions of the app
 1. AWS console > beanstalk > applications > callig-api > View Application Versions
 2. select version(s) to delete, this will also remove jars in S3
+
+
+## Heroku
+see: https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
+
+```
+heroku login
+
+# one time only
+heroku create
+
+git push heroku main
+```
