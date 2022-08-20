@@ -14,7 +14,7 @@
 	<name>api</name>
 	<description>arabic calligraphy api</description>
 	<properties>
-<!--		<java.version>11</java.version>-->
+		<java.version>18</java.version>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss</maven.build.timestamp.format>
 	</properties>
 	<dependencies>
@@ -45,10 +45,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-<!--                <configuration>-->
-<!--                    <source>11</source>-->
-<!--                    <target>11</target>-->
-<!--                </configuration>-->
+                <configuration>
+                    <source>18</source>
+                    <target>18</target>
+                </configuration>
             </plugin>
 <!--			<plugin>-->
 <!--				<groupId>br.com.ingenieux</groupId>-->
